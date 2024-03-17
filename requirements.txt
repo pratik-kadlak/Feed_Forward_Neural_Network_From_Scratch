@@ -1,0 +1,6 @@
+numpy
+wandb
+matplotlib
+keras 
+tqdm
+sklearn
