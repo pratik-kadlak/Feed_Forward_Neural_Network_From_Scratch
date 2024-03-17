@@ -258,7 +258,7 @@ def backward_propogation(W, b, y_one_hot, activation, preactivation, L, activati
     if loss_func == "cross_entropy":
         grad_preactivation.append(activation[L]-y_one_hot)
     else:
-        grad_preactivation.append(np.multiply((activation[L]-y_one_hot) , -2*np.multiply(activation[L], 1-activation[L])))
+        grad_preactivation.append(np.multiply((activation[L]-y_one_hot) , 2*np.multiply(activation[L], 1-activation[L])))
 
     grad_W = []
     grad_b = []
@@ -342,6 +342,9 @@ def update_parameters_rmsprop(W, grad_W, b, grad_b, vt_W, vt_b, eta, beta, epsil
 
 
 def update_parameters_adam(W, grad_W, vt_W, mt_W, b, grad_b, vt_b, mt_b, t, eta, beta1, beta2, epsilon):
+    """
+        adam optimizer 
+    """
     for i in range(len(W)):
         curr_mt_W = beta1 * mt_W[i] + (1 - beta1) * grad_W[i]
         curr_mt_b = beta1 * mt_b[i] + (1 - beta1) * grad_b[i]
@@ -369,6 +372,9 @@ def update_parameters_adam(W, grad_W, vt_W, mt_W, b, grad_b, vt_b, mt_b, t, eta,
 
 
 def update_parameters_nadam(W, grad_W, vt_W, mt_W, b, grad_b, vt_b, mt_b, t, eta, beta1, beta2, epsilon):
+    """
+        nadam optimizer 
+    """
     for i in range(len(W)):
         curr_mt_W = beta1 * mt_W[i] + (1 - beta1) * grad_W[i]
         curr_mt_b = beta1 * mt_b[i] + (1 - beta1) * grad_b[i]
@@ -420,24 +426,24 @@ def gradient_descent(X_train, X_val, y_train, y_val, args):
         batch_size = 1
 
     # used for momentum
-    beta = 0.5
+    beta = args.momentum
     W_history = [0] * (num_hidden_layers+1)
     b_history = [0] * (num_hidden_layers+1)
 
     # used for rmsprop
     vt_W = [0] * (num_hidden_layers+1)
     vt_b = [0] * (num_hidden_layers+1)
-    epsilon = 1e-8
-    beta = 0.5
+    epsilon = args.epsilon
+    beta = args.beta
 
     # usef for adam and nadam
     vt_W = [0] * (num_hidden_layers+1)
     vt_b = [0] * (num_hidden_layers+1)
     mt_W = [0] * (num_hidden_layers+1)
     mt_b = [0] * (num_hidden_layers+1)
-    beta1 = 0.9
-    beta2 = 0.999
-    epsilon = 1e-8
+    beta1 = args.beta1
+    beta2 = args.beta2
+    epsilon = args.epsilon
     t = 1
 
     run_name = f"opt_{optimizer}_act_{activation_func}_ep_{epoch}_eta_{eta}_L_{num_hidden_layers}_hs_{size_of_hidden_layer}_bs_{batch_size}_mthd_{method}_wd_{weight_decay}"
@@ -619,7 +625,7 @@ parser = argparse.ArgumentParser(description='Description of your script.')
 
 # Add arguments to the parser
 parser.add_argument('-wp', '--wandb_project', default='DL_Assignment_1', help='Project name used to track experiments in Weights & Biases dashboard.')
-parser.add_argument('-we', '--wandb_entity', default='DL_Assignment_1', help='Wandb Entity used to track experiments in the Weights & Biases dashboard.')
+parser.add_argument('-we', '--wandb_entity', default='space_monkeys', help='Wandb Entity used to track experiments in the Weights & Biases dashboard.')
 parser.add_argument('-d', '--dataset', default='fashion_mnist', choices=['mnist', 'fashion_mnist'], help='Choices: ["mnist", "fashion_mnist"]')
 parser.add_argument('-e', '--epochs', type=int, default=10, help='Number of epochs to train neural network.')
 parser.add_argument('-b', '--batch_size', type=int, default=16, help='Batch size used to train neural network.')
