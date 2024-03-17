@@ -53,22 +53,26 @@ Arguments to be supported
 Name	Default Value	Description
 | Argument           | Description                                                    | Default Value |
 |--------------------|----------------------------------------------------------------|---------------|
-| -wp, --wandb_project | Project name used to track experiments in Weights & Biases dashboard | myprojectname |
-| -we, --wandb_entity  | Wandb Entity used to track experiments in the Weights & Biases dashboard | myname |
+| -wp, --wandb_project | Project name used to track experiments in Weights & Biases dashboard | DL_Assignment_1 |
+| -we, --wandb_entity  | Wandb Entity used to track experiments in the Weights & Biases dashboard | DL_Assignment_1 |
 | -d, --dataset       | Dataset used for training. Choices: ["mnist", "fashion_mnist"] | fashion_mnist |
-| -e, --epochs        | Number of epochs to train neural network                        | 1             |
-| -b, --batch_size    | Batch size used to train neural network                         | 4             |
+| -e, --epochs        | Number of epochs to train neural network                        | 10            |
+| -b, --batch_size    | Batch size used to train neural network                         | 16            |
 | -l, --loss          | Loss function used. Choices: ["mean_squared_error", "cross_entropy"] | cross_entropy |
-| -o, --optimizer     | Optimizer used for training. Choices: ["sgd", "momentum", "nag", "rmsprop", "adam", "nadam"] | sgd |
-| -lr, --learning_rate | Learning rate used to optimize model parameters                 | 0.1           |
-| -m, --momentum      | Momentum used by momentum and nag optimizers                    | 0.5           |
-| -beta, --beta       | Beta used by rmsprop optimizer                                  | 0.5           |
-| -beta1, --beta1     | Beta1 used by adam and nadam optimizers                         | 0.5           |
-| -beta2, --beta2     | Beta2 used by adam and nadam optimizers                         | 0.5           |
+| -o, --optimizer     | Optimizer used for training. Choices: ["sgd", "momentum", "nag", "rmsprop", "adam", "nadam"] | adam |
+| -lr, --learning_rate | Learning rate used to optimize model parameters                 | 0.0001       |
+| -m, --momentum      | Momentum used by momentum and nag optimizers                    | 0.9           |
+| -beta, --beta       | Beta used by rmsprop optimizer                                  | 0.9           |
+| -beta1, --beta1     | Beta1 used by adam and nadam optimizers                         | 0.9           |
+| -beta2, --beta2     | Beta2 used by adam and nadam optimizers                         | 0.999         |
 | -eps, --epsilon     | Epsilon used by optimizers                                      | 0.000001      |
-| -w_d, --weight_decay | Weight decay used by optimizers                                 | 0.0           |
-| -w_i, --weight_init | Weight initialization method. Choices: ["random", "Xavier"]      | random        |
-| -nhl, --num_layers  | Number of hidden layers used in feedforward neural network      | 1             |
-| -sz, --hidden_size  | Number of hidden neurons in a feedforward layer                 | 4             |
-| -a, --activation    | Activation function used. Choices: ["identity", "sigmoid", "tanh", "ReLU"] | sigmoid |
+| -w_d, --weight_decay | Weight decay used by optimizers                                 | 0.0005        |
+| -w_i, --weight_init | Weight initialization method. Choices: ["random", "Xavier"]      | Xavier        |
+| -nhl, --num_layers  | Number of hidden layers used in feedforward neural network      | 5             |
+| -sz, --hidden_size  | Number of hidden neurons in a feedforward layer                 | 128            |
+| -a, --activation    | Activation function used. Choices: ["identity", "sigmoid", "tanh", "ReLU"] | tanh |
+
+## Report Link
+https://wandb.ai/space_monkeys/DL_Assignment_1/reports/CS6910-Assignment-1--Vmlldzo3MTI2NDU2
+
 
